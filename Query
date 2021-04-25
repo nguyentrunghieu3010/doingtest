@@ -1,0 +1,20 @@
+SELECT userId,  MIN(timestamp)  as FIRST_LOGIN, MAX(timestamp) as LAST_LOGIN
+FROM audit_log
+GROUP BY userId;
+
+SELECT
+     YEAR(timestamp) as Year,
+     MONTH(timestamp) as Month,
+     COUNT(*) as NumberOfLogin
+FROM audit_log
+-- WHERE YEAR (timestamp) = 2017
+GROUP BY Year,Month
+ORDER BY Year, Month
+
+SELECT
+     userId,
+     YEAR(timestamp) as Year,
+     MONTH(timestamp) as Month
+FROM audit_log
+GROUP BY userId, Year,Month
+HAVING COUNT(*) > 10
